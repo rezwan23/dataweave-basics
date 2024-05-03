@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="covid-register-case-metadata" format="json">
+      <types:shape format="weave" example="examples/a.json"><![CDATA[%dw 2.0
+
+type covid_register_case_metadata = Array<{|  source: String,   caseType: String,   firstName: String,   lastName: String,   phone: String,   email: String,   dateOfBirth: String,   nationalID: String,   nationalIDType: String,   address: {|    streetAddress: String,     city: String,     state: String,     postal: String,     country: String  |}|}> {"example": "[{\\\"source\\\":\\\"Hospital1\\\",\\\"caseType\\\":\\\"positive\\\",\\\"firstName\\\":\\\"John\\\",\\\"lastName\\\":\\\"Nixon\\\",\\\"phone\\\":\\\"541-754-3010\\\",\\\"email\\\":\\\"john@gmail.com\\\",\\\"dateOfBirth\\\":\\\"1989-04-26\\\",\\\"nationalID\\\":\\\"209-49-6193\\\",\\\"nationalIDType\\\":\\\"SSN\\\",\\\"address\\\":{\\\"streetAddress\\\":\\\"1600PennsylvaniaAvenueNW\\\",\\\"city\\\":\\\"Washington\\\",\\\"state\\\":\\\"DC\\\",\\\"postal\\\":\\\"20500\\\",\\\"country\\\":\\\"USA\\\"}},{\\\"source\\\":\\\"Hospital11\\\",\\\"caseType\\\":\\\"posit1ive\\\",\\\"firstName\\\":\\\"Jo1hn\\\",\\\"lastName\\\":\\\"Nixo1n\\\",\\\"phone\\\":\\\"541-7541-3010\\\",\\\"email\\\":\\\"joh1n@gmail.com\\\",\\\"dateOfBirth\\\":\\\"1989-04-16\\\",\\\"nationalID\\\":\\\"209-49-61193\\\",\\\"nationalIDType\\\":\\\"SSN1\\\",\\\"address\\\":{\\\"streetAddress\\\":\\\"16010PennsylvaniaAvenueNW\\\",\\\"city\\\":\\\"Washin1gton\\\",\\\"state\\\":\\\"D1C\\\",\\\"postal\\\":\\\"201500\\\",\\\"country\\\":\\\"USA\\\"}},{\\\"source\\\":\\\"Hospi3tal11\\\",\\\"caseType\\\":\\\"pos3it1ive\\\",\\\"firstName\\\":\\\"Jo1hn\\\",\\\"lastName\\\":\\\"Nixo1n\\\",\\\"phone\\\":\\\"541-7541-3010\\\",\\\"email\\\":\\\"joh1n@gmail.com\\\",\\\"dateOfBirth\\\":\\\"1989-04-16\\\",\\\"nationalID\\\":\\\"209-49-61193\\\",\\\"nationalIDType\\\":\\\"SSN1\\\",\\\"address\\\":{\\\"streetAddress\\\":\\\"16010PennsylvaniaAvenueNW\\\",\\\"city\\\":\\\"Washin1gton\\\",\\\"state\\\":\\\"D1C\\\",\\\"postal\\\":\\\"201500\\\",\\\"country\\\":\\\"USA\\\"}},{\\\"source\\\":\\\"Hos2pital11\\\",\\\"caseType\\\":\\\"pos2it1ive\\\",\\\"firstName\\\":\\\"Jo1hn\\\",\\\"lastName\\\":\\\"Nixo1n\\\",\\\"phone\\\":\\\"541-7541-3010\\\",\\\"email\\\":\\\"joh1n@gmail.com\\\",\\\"dateOfBirth\\\":\\\"1989-04-16\\\",\\\"nationalID\\\":\\\"209-49-61193\\\",\\\"nationalIDType\\\":\\\"SSN1\\\",\\\"address\\\":{\\\"streetAddress\\\":\\\"16010PennsylvaniaAvenueNW\\\",\\\"city\\\":\\\"Washin1gton\\\",\\\"state\\\":\\\"D1C\\\",\\\"postal\\\":\\\"201500\\\",\\\"country\\\":\\\"USA\\\"}}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="update-covid-case-meta-data" format="xml">
+      <types:example format="xml" element="covidCases" location="examples/a.xml"/>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#55bb2b3c-dec9-40e1-b64a-85d038c07e2f">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="covid-register-case-metadata"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#df625e4b-5c11-4282-a915-e182006e4f1f">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="update-covid-case-meta-data"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
